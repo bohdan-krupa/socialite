@@ -4,19 +4,33 @@
     <div class="auth">
       <h1>Welcome</h1>
       <div class="inputs">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
+        <input v-model="email" type="text" placeholder="Email">
+        <input v-model="pass" type="password" placeholder="Password">
       </div>
-      <div class="btn">Sign In</div>
+      <div @click="signIn" class="btn">Sign In</div>
     </div>
   </div>
 </template>
 
 <script>
+  import firebase from 'firebase'
 
-export default {
 
-}
+  export default {
+    data() {
+      return {
+        email: null,
+        pass:  null
+      }
+    },
+    methods: {
+      signIn() {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.pass).then(() => {
+          this.$router.replace('/flow')
+        })
+      }
+    }
+  }
 
 </script>
 
@@ -33,6 +47,7 @@ export default {
       height: 0
 
     .auth
+      min-height: 400px
       flex: 50
       display: flex
       flex-direction: column
@@ -44,6 +59,7 @@ export default {
 
       h1
         color: #333
+        margin-bottom: -30px
 
       .inputs
         display: flex
@@ -53,18 +69,21 @@ export default {
 
         input
           width: 100%
-          margin-bottom: 20px
-          padding: 10px
+          margin-bottom: 30px
+          padding: 15px
           border: none
-          border-bottom: 1px solid grey
+          border-bottom: 1px solid #CCC
           outline: none
           font-size: 17px
+
+          &:focus
+            border-bottom-color: grey
 
       .btn
         width: 80%
         text-align: center
         background-color: lighten(#C92A57, 10)
         padding: 15px 0
-        font-size: 18px
+        font-size: 19px
         border-radius: 20px
 </style>
