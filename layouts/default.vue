@@ -1,55 +1,85 @@
 <template>
-  <div>
-    <nuxt />
+  <div
+    v-touch:swipe.right="swipeToRight"
+    v-touch:swipe.left="swipeToLeft"
+    class="container"
+  >
+    <Menu :class="{ hide: menu != 'left' }" class="menu-left" />
+    <div :class="{ full: menu == 'none' }" class="area">
+      <nuxt />
+    }
+    }
+    </div>
+    <Menu :class="{ hide: menu != 'right' }" class="menu-right" />
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+  import Menu from '~/components/Menu.vue'
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+  export default {
+    data() {
+      return {
+        menu: 'left'
+      }
+    },
+    methods: {
+      swipeToRight() {
+        if (this.menu == 'none') this.menu = 'left'
+        else if (this.menu == 'right') this.menu = 'none'
+      },
+      swipeToLeft() {
+        if (this.menu == 'none') this.menu = 'right'
+        else if (this.menu == 'left') this.menu = 'none'
+      }
+    },
+    components: {
+      Menu
+    }
+  }
+</script>
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+<style lang="sass">
+  html
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+    font-size: 16px
+    word-spacing: 1px
+    -ms-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+    box-sizing: border-box
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
+  *,
+  *:before,
+  *:after
+    box-sizing: border-box
+    margin: 0
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+  @import '~/assets/variables'
+
+  .container
+    display: flex
+    flex-flow: wrap
+    height: 100vh
+    overflow-x: hidden
+    background-color: $container-bg
+
+    .menu-left, .menu-right, .area
+      transition: 200ms all
+
+    .menu-left.hide
+      margin-left: -65px
+
+    .menu-right.hide
+      margin-right: -65px
+
+    .area
+      width: calc(100% - #{$menu-width})
+      height: 100vh
+      overflow-y: auto
+
+    .full
+      width: 100%
 </style>

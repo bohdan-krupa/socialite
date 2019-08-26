@@ -1,6 +1,19 @@
 <template>
-  <div class="container">
-    <Menu />
+  <div>
+    <div class="messages">
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+      <div class="message-box"></div>
+    </div>
   </div>
 </template>
 
@@ -16,10 +29,12 @@
 
 <style lang="sass">
   @import '~/assets/variables.sass'
+  .messages
+    padding: 20px
 
-  .container
-    display: flex
-    flex-flow: wrap
-    height: 100vh
-    background-color: #888
+    .message-box
+      height: 100px
+      margin-top: 20px
+      background-color: $message-box-bg
+      border-radius: 20px
 </style>
