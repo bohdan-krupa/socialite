@@ -17,6 +17,7 @@
 
 
   export default {
+    layout: 'sign-in',
     data() {
       return {
         email: null,

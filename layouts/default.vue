@@ -7,8 +7,6 @@
     <Menu :class="{ hide: menu != 'left' }" class="menu-left" />
     <div :class="{ full: menu == 'none' }" class="area">
       <nuxt />
-    }
-    }
     </div>
     <Menu :class="{ hide: menu != 'right' }" class="menu-right" />
   </div>
@@ -77,7 +75,7 @@
 
     .area
       width: calc(100% - #{$menu-width})
-      height: 100vh
+      height: 100%
       overflow-y: auto
 
     .full

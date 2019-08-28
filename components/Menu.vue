@@ -31,9 +31,9 @@
     justify-content: space-around
     width: $menu-width
     padding: 50px 0 250px 0
-    background-color: #CCC
+    background-color: $menu-bg
 
-    // margin-left: -65px
+    // border-bottom-right-radius: 100px
 
     div
       width: $icon-size
